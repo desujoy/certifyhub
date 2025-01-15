@@ -17,12 +17,9 @@ contract CertifyHubTest is Test {
 
         certifyHub.generateCertificate(candidate_name, template);
 
-        bytes32 certificate_id = keccak256(
-            abi.encodePacked(candidate_name, template)
-        );
+        bytes32 certificate_id = keccak256(abi.encodePacked(candidate_name, template));
 
-        (string memory _candidate_name, string memory _template) = certifyHub
-            .getCertificate(certificate_id);
+        (string memory _candidate_name, string memory _template) = certifyHub.getCertificate(certificate_id);
 
         assertEq(_candidate_name, candidate_name);
         assertEq(_template, template);
@@ -37,14 +34,9 @@ contract CertifyHubTest is Test {
         certifyHub.generateMultiCertificate(candidate_names, template);
 
         for (uint256 i = 0; i < candidate_names.length; i++) {
-            bytes32 certificate_id = keccak256(
-                abi.encodePacked(candidate_names[i], template)
-            );
+            bytes32 certificate_id = keccak256(abi.encodePacked(candidate_names[i], template));
 
-            (
-                string memory _candidate_name,
-                string memory _template
-            ) = certifyHub.getCertificate(certificate_id);
+            (string memory _candidate_name, string memory _template) = certifyHub.getCertificate(certificate_id);
 
             assertEq(_candidate_name, candidate_names[i]);
             assertEq(_template, template);
@@ -75,9 +67,7 @@ contract CertifyHubTest is Test {
         string memory candidate_name = "John Doe";
         string memory template = "Certificate Template";
 
-        bytes32 certificate_id = keccak256(
-            abi.encodePacked(candidate_name, template)
-        );
+        bytes32 certificate_id = keccak256(abi.encodePacked(candidate_name, template));
 
         vm.expectRevert();
         certifyHub.getCertificate(certificate_id);
@@ -87,9 +77,7 @@ contract CertifyHubTest is Test {
         string memory candidate_name = "John Doe";
         string memory template = "Certificate Template";
 
-        bytes32 certificate_id = keccak256(
-            abi.encodePacked(candidate_name, template)
-        );
+        bytes32 certificate_id = keccak256(abi.encodePacked(candidate_name, template));
 
         certifyHub.generateCertificate(candidate_name, template);
 
@@ -107,9 +95,7 @@ contract CertifyHubTest is Test {
         certifyHub.generateMultiCertificate(candidate_names, template);
 
         for (uint256 i = 0; i < candidate_names.length; i++) {
-            bytes32 certificate_id = keccak256(
-                abi.encodePacked(candidate_names[i], template)
-            );
+            bytes32 certificate_id = keccak256(abi.encodePacked(candidate_names[i], template));
 
             bool isVerified = certifyHub.isVerified(certificate_id);
 
@@ -117,13 +103,11 @@ contract CertifyHubTest is Test {
         }
     }
 
-    function testVerifyInvalidCertificate() view public {
+    function testVerifyInvalidCertificate() public view {
         string memory candidate_name = "John Doe";
         string memory template = "Certificate Template";
 
-        bytes32 certificate_id = keccak256(
-            abi.encodePacked(candidate_name, template)
-        );
+        bytes32 certificate_id = keccak256(abi.encodePacked(candidate_name, template));
 
         bool isVerified = certifyHub.isVerified(certificate_id);
 
