@@ -1,4 +1,8 @@
-address = "0xC43e51908a1550F2f57ee408dd17366D37F2AF36"
+rpc_url = "http://127.0.0.1:8545"
+
+address = "0xA6Db00B8B7D2296810939Fff4bdCDc9A200D1F55"
+
+master_address = "0xc8387e91f1E6fC8BF072dE7ba50660d3B2A3DdDe"
 
 abi = [
     {"inputs": [], "stateMutability": "nonpayable", "type": "constructor"},

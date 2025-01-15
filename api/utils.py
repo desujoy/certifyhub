@@ -6,10 +6,10 @@ from werkzeug.utils import secure_filename
 from web3 import Web3
 import base64
 from io import BytesIO
-from blockchain import abi, address
+from blockchain import rpc_url, abi, address, master_address
 
-w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
-contract = w3.eth.contract(address=address, abi=abi)
+w3 = Web3(Web3.HTTPProvider(rpc_url))
+contract = w3.eth.contract(address=Web3.to_checksum_address(address), abi=abi)
 
 
 def generate_certificate(
@@ -40,7 +40,7 @@ def generate_certificate(
         img.save(filename)
         try:
             contract.functions.generateCertificate(name, template).transact(
-                {"from": "0x4FFD4A78986F8DcbfC61afeD0656BF5c0cE63d92"}
+                {"from": master_address}
             )
         except:
             continue
