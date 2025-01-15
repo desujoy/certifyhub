@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.25;
 
-contract TrustEaseCertify {
+contract CertifyHub {
     struct Certificate {
         string candidate_name;
         string template;
