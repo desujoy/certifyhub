@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState  } from "react";
+import React from "react";
 import { Stage, Layer, Image as KonvaImage, Rect } from "react-konva";
 import useImage from "use-image";
 import { CSV } from "../definitions";
