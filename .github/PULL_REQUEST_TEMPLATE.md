@@ -1,15 +1,20 @@
+# Pull Request
+
 ## Summary  
-Provide a brief summary of the changes made in this PR.
+Provide a summary of your changes.
 
 ## Related Issues  
-List any related issues this PR fixes.  
-Fixes # (issue number)
+Closes #<issue-number> (if applicable).
 
 ## Changes Made  
-Describe the specific changes made in this PR.
+- [ ] Added new files
+- [ ] Updated existing functionality
+- [ ] Fixed a bug
 
 ## Screenshots (if applicable)  
-Include relevant screenshots or GIFs that demonstrate the changes (if applicable).
+Attach any relevant screenshots.
 
 ## Testing Instructions  
-Provide steps to test the changes locally.
+1. Run `npm test` (or relevant command)
+2. Verify that all tests pass
+3. Ensure the new feature works as expected
