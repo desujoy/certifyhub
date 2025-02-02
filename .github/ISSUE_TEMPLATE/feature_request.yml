@@ -1,0 +1,46 @@
+name: 🆕 Feature Request
+description: Suggest an idea for this project
+title: "[FEATURE] "
+labels: [enhancement]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please provide as much detail as possible to help us understand your idea.
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description ✍️
+      description: Provide a detailed description of the feature you are proposing.
+      placeholder: Explain what the feature is and its purpose.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case 📌
+      description: Describe the specific problem this feature solves or the scenario where it would be useful.
+      placeholder: Explain when and why this feature would be helpful.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution 💡
+      description: Suggest how this feature could be implemented.
+      placeholder: Describe the approach or changes needed to add this feature.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered 🔄
+      description: List any alternative solutions or workarounds you have thought of.
+      placeholder: Explain any other ways this problem could be addressed.
+    validations:
+      required: false

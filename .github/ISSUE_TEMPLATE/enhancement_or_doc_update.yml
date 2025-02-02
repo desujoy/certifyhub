@@ -1,0 +1,47 @@
+name: 📖 Enhancement/Documentation Update
+description: Suggest an improvement or documentation update
+title: "[ENHANCEMENT] "
+labels: [enhancement, documentation]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an enhancement or documentation update!  
+        Please provide as much detail as possible.
+
+  - type: textarea
+    id: enhancement-description
+    attributes:
+      label: Enhancement/Update Description ✍️
+      description: Provide a detailed description of the enhancement or documentation update.
+      placeholder: Explain what needs improvement or update.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: Reason for Enhancement/Update 🤔
+      description: Explain why this improvement is necessary or how it benefits the project.
+      placeholder: Describe the issue or limitation this enhancement/update addresses.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-changes
+    attributes:
+      label: Proposed Changes 💡
+      description: Suggest how this enhancement or update should be implemented.
+      placeholder: Provide details on what needs to be changed or added.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context 📌 (if applicable)
+      description: Add any other relevant details, screenshots, or references.
+      placeholder: Include links, screenshots, or anything else that helps understand the request.
+    validations:
+      required: false
