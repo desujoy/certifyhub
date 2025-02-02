@@ -1,0 +1,72 @@
+name: 🪲 Bug Report 
+description: Report your bug by filling the information given below
+title: "[Bug]: "
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!  
+        Please provide as much detail as possible to help us resolve the issue.
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Description ✍️
+      description: Provide a clear and concise description of the bug.
+      placeholder: Enter a summary of the issue, along with relevant context and motivation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: instructions
+    attributes:
+      label: Steps to Reproduce 🔄
+      description: Provide step-by-step instructions on how to reproduce the bug.
+      placeholder: |
+        1. Open the application
+        2. Navigate to...
+        3. Click on...
+        4. Observe the issue...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior 🤔
+      description: Describe what you expected to happen.
+      placeholder: Clearly explain how the feature should behave.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior ⚠️
+      description: Describe what actually happened when you encountered the bug.
+      placeholder: Explain what went wrong and how it differs from the expected behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots 📸 (if applicable)
+      description: Attach screenshots or GIFs that illustrate the issue.
+      placeholder: Drag and drop images here or paste links to screenshots.
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment-details
+    attributes:
+      label: Environment Details 🖥️
+      description: Provide details about your environment to help debug the issue.
+      placeholder: |
+        - OS: Windows 11 / macOS 14 / Linux
+        - Browser: Chrome / Firefox / Edge
+        - Node.js version: v18.x.x
+        - Any other relevant information
+    validations:
+      required: true
