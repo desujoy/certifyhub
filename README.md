@@ -1,171 +1,83 @@
 # CertifyHub
 
-CertifyHub is a blockchain-based certificate generation and validation system built using Solidity. It leverages blockchain technology to ensure the security, authenticity, and immutability of certificates.
+CertifyHub is a comprehensive platform that simplifies the process of creating, managing, and verifying digital certificates. This project consists of three main components: the backend (smart contracts), the client (web interface), and the API (backend logic and blockchain integration).
 
 ## Features
+- Create and upload certificate templates.
+- Upload CSVs to bulk-generate certificates.
+- Edit certificate designs using the Template Editor.
+- Verify certificates using the blockchain.
 
-- **Certificate Generation**: Generate unique certificates for candidates.
-- **Batch Certificate Generation**: Generate multiple certificates in a single transaction.
-- **Certificate Validation**: Verify the authenticity of a certificate on the blockchain.
-- **Transparency**: Publicly verifiable certificates to enhance trust.
-
-## Contract Details
-
-### TrustEaseCertify
-
-The `TrustEaseCertify` contract includes the following functions:
-
-- **generateCertificate**: Generates a unique certificate for a candidate.
-- **generateMultiCertificate**: Generates multiple certificates in a single transaction.
-- **getCertificate**: Retrieves the details of a certificate using its ID.
-- **isVerified**: Checks if a certificate exists and is valid.
-
-### Solidity Code
-
-```solidity
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.25;
-
-contract TrustEaseCertify {
-    struct Certificate {
-        string candidate_name;
-        string template;
-    }
-    mapping(bytes32 => Certificate) public certificates;
-    event certificateGenerated(bytes32 certificate_id);
-
-    function generateCertificate(
-        string memory _candidate_name,
-        string memory _template
-    ) public {
-        bytes32 _certificate_id = keccak256(
-            abi.encodePacked(_candidate_name, _template)
-        );
-        require(
-            bytes(certificates[_certificate_id].candidate_name).length == 0,
-            "Certificate with this ID already exists"
-        );
-
-        Certificate memory cert = Certificate({
-            candidate_name: _candidate_name,
-            template: _template
-        });
-
-        certificates[_certificate_id] = cert;
-
-        emit certificateGenerated(_certificate_id);
-    }
-
-    function generateMultiCertificate(
-        string[] memory _candidate_name,
-        string memory _template
-    ) public {
-        for (uint256 i = 0; i < _candidate_name.length; i++) {
-            bytes32 _certificate_id = keccak256(
-                abi.encodePacked(_candidate_name[i], _template)
-            );
-
-            if (
-                bytes(certificates[_certificate_id].candidate_name).length != 0
-            ) {
-                revert();
-            }
-
-            Certificate memory cert = Certificate({
-                candidate_name: _candidate_name[i],
-                template: _template
-            });
-
-            certificates[_certificate_id] = cert;
-
-            emit certificateGenerated(_certificate_id);
-        }
-    }
-
-    function getCertificate(bytes32 _certificate_id)
-        public
-        view
-        returns (string memory _candidate_name, string memory _template)
-    {
-        Certificate memory cert = certificates[_certificate_id];
-
-        require(
-            bytes(certificates[_certificate_id].candidate_name).length != 0,
-            "Certificate with this ID does not exist"
-        );
-
-        return (cert.candidate_name, cert.template);
-    }
-
-    function isVerified(bytes32 _certificate_id) public view returns (bool) {
-        return bytes(certificates[_certificate_id].candidate_name).length != 0;
-    }
-}
+## Directory Structure
+```
+├── api/ (Flask-Py)
+├── backend/ (Foundry DApp)
+├── client/ (React-Vite)
+└── uploads/
 ```
 
 ## Getting Started
 
 ### Prerequisites
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/en/download/current) and npm
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) (for deploying smart contracts)
+- Python
+- [pipenv](https://pypi.org/project/pipenv/)
 
-- [Node.js](https://nodejs.org/)
-- [Truffle](https://www.trufflesuite.com/truffle)
-- [Ganache](https://www.trufflesuite.com/ganache) (for local development)
-- [MetaMask](https://metamask.io/) (for interacting with the deployed contract)
+### Setup Instructions
 
-### Installation
+1. **Backend**:
+   - Navigate to the `backend` directory.
+   - Deploy the smart contracts:
+     ```bash
+     forge script .\script\01_Deploy.s.sol --broadcast --rpc-url <RPC_URL>
+     ```
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/desujoy/certifyhub.git
-   cd certifyhub
-   ```
+2. **Client**:
+   - Navigate to the `client` directory.
+   - Install dependencies and build the project:
+     ```bash
+     npm install
+     npm run build
+     ```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+3. **API**:
+   - Navigate to the `api` directory.
+   - Configure the `rpc_url`, `address`, and `master_address` in the `blockchain.py` file:
+     ```python
+     rpc_url = "http://127.0.0.1:8545" # RPC URL
+     address = "0x" # Address of the deployed contract
+     master_address = "0x" # Address of the funded account
+     ```
+   - Install dependencies and run the API server:
+     ```bash
+     pipenv install
+     pipenv run python app.py
+     ```
 
-3. Compile the smart contracts:
-   ```bash
-   truffle compile
-   ```
+## Usage
 
-4. Deploy the smart contracts to your local blockchain:
-   ```bash
-   truffle migrate
-   ```
+1. Access the client interface via the built web application.
+2. Upload templates and CSV files to generate certificates.
+3. Verify certificates using the verification component.
 
-### Usage
+## Development Workflow
 
-1. Open Ganache and make sure it's running.
-
-2. Interact with the deployed contract using Truffle console:
-   ```bash
-   truffle console
-   ```
-
-3. Generate a certificate:
-   ```javascript
-   let instance = await TrustEaseCertify.deployed();
-   await instance.generateCertificate("John Doe", "Template1");
-   ```
-
-4. Verify a certificate:
-   ```javascript
-   let isValid = await instance.isVerified("certificate_id");
-   console.log(isValid);
-   ```
+- Smart Contracts: Developed using Foundry and Solidity.
+- Web Client: Built with Vite, React, and Tailwind CSS.
+- API: Implemented in Python with blockchain integration.
 
 ## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ## Contributing
+Contributions are welcome! Please follow these steps:
+1. Fork the repository.
+2. Create a new branch.
+3. Commit your changes.
+4. Submit a pull request.
 
-Contributions are welcome! Please open an issue or submit a pull request for any changes.
+## Acknowledgments
+Special thanks to the contributors and the open-source community for making this project possible.
 
-## Acknowledgements
-
-- [OpenZeppelin](https://openzeppelin.com/) for their great library of smart contract templates.
-- [Truffle](https://www.trufflesuite.com/) for providing an excellent development framework.
-- [Ethereum](https://ethereum.org/) for the blockchain platform.
