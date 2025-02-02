@@ -29,15 +29,15 @@ jobs:
 
       - name: Run Forge fmt
         run: |
-          forge fmt --check
+          cd backend && forge fmt --check
         id: fmt
 
       - name: Run Forge build
         run: |
-          forge build --sizes
+          cd backend && forge build --sizes
         id: build
 
       - name: Run Forge tests
         run: |
-          forge test -vvv
+          cd backend && forge test -vvv
         id: test
