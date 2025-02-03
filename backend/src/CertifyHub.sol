@@ -24,7 +24,7 @@ contract CertifyHub {
         emit certificateGenerated(_certificate_id);
     }
 
-    function generateMultiCertificate(string[] memory _candidate_name, string memory _template) external {
+    function generateMultiCertificate(string[] calldata _candidate_name, string calldata _template) external {
         for (uint256 i = 0; i < _candidate_name.length; i++) {
             bytes32 _certificate_id = keccak256(abi.encodePacked(_candidate_name[i], _template));
 
