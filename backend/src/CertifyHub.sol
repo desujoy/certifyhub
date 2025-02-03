@@ -11,7 +11,7 @@ contract CertifyHub {
 
     event certificateGenerated(bytes32 certificate_id);
 
-    function generateCertificate(string calldata _candidate_name, string calldata _template) external {
+    function generateCertificate(string memory _candidate_name, string memory _template) public {
         bytes32 _certificate_id = keccak256(abi.encodePacked(_candidate_name, _template));
         require(
             bytes(certificates[_certificate_id].candidate_name).length == 0, "Certificate with this ID already exists"
@@ -24,7 +24,7 @@ contract CertifyHub {
         emit certificateGenerated(_certificate_id);
     }
 
-    function generateMultiCertificate(string[] calldata _candidate_name, string calldata _template) external {
+    function generateMultiCertificate(string[] memory _candidate_name, string memory _template) public {
         for (uint256 i = 0; i < _candidate_name.length; i++) {
             bytes32 _certificate_id = keccak256(abi.encodePacked(_candidate_name[i], _template));
 
@@ -41,7 +41,7 @@ contract CertifyHub {
     }
 
     function getCertificate(bytes32 _certificate_id)
-        external
+        public
         view
         returns (string memory _candidate_name, string memory _template)
     {
@@ -54,7 +54,7 @@ contract CertifyHub {
         return (cert.candidate_name, cert.template);
     }
 
-    function isVerified(bytes32 _certificate_id) external view returns (bool) {
+    function isVerified(bytes32 _certificate_id) public view returns (bool) {
         return bytes(certificates[_certificate_id].candidate_name).length != 0;
     }
 }
