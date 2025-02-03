@@ -11,7 +11,7 @@ contract CertifyHub {
 
     event certificateGenerated(bytes32 certificate_id);
 
-    function generateCertificate(string memory _candidate_name, string memory _template) external {
+    function generateCertificate(string calldata _candidate_name, string calldata _template) external {
         bytes32 _certificate_id = keccak256(abi.encodePacked(_candidate_name, _template));
         require(
             bytes(certificates[_certificate_id].candidate_name).length == 0, "Certificate with this ID already exists"
