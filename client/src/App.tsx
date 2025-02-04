@@ -1,13 +1,12 @@
+// src/App.tsx
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Templates from "./pages/Templates";
+import Generate from "./pages/Generate";
+import Verify from "./pages/Verify";
+import Navbar from "./components/Navbar";
 import { useState } from "react";
-import CertificateEditor from "./components/CertificateEditor";
-import TemplateList from "./components/TemplateList";
-import TemplateUploader from "./components/TemplateUploader";
-import CSVUploader from "./components/CSVUploader";
-import CSVList from "./components/CSVList";
 import { CSV } from "./definitions";
-import VerifyCertificate from "./components/VerifyCertificate";
-// import TemplateEditor from "./components/TemplateEditor";
-
 function App() {
   const [template, setTemplate] = useState("");
   const [csv, setCsv] = useState<CSV>({
@@ -15,15 +14,15 @@ function App() {
     fields: [],
   });
   return (
-    <>
-      {/* <TemplateEditor template={template}/> */}
-      <CertificateEditor template={template} csv={csv} />
-      <TemplateUploader />
-      <CSVUploader />
-      <TemplateList setTemplate={setTemplate} />
-      <CSVList setCsv={setCsv} />
-      <VerifyCertificate />
-    </>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/templates" element={<Templates template={template} setTemplate={setTemplate} />} />
+        <Route path="/generate" element={<Generate template={template} csv={csv} setCsv={setCsv} />} />
+        <Route path="/verify" element={<Verify />} />
+      </Routes>
+    </Router>
   );
 }
 
