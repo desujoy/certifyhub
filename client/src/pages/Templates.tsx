@@ -1,11 +1,16 @@
 // src/pages/Templates.tsx
-import { useState } from "react";
+
 import TemplateUploader from "../components/TemplateUploader";
 import TemplateList from "../components/TemplateList";
 import TemplateEditor from "../components/TemplateEditor";
 
-export default function Templates() {
-  const [template, setTemplate] = useState("");
+export default function Templates({template,
+  setTemplate,
+}: {
+  template: string;
+  setTemplate: (template: string) => void;
+}) {
+  
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -13,12 +18,12 @@ export default function Templates() {
       <TemplateUploader />
       <TemplateList setTemplate={setTemplate} />
 
-      {template && (
+       {/*{template && (
         <div className="mt-6 w-full flex flex-col items-center">
           <h2 className="text-2xl font-semibold">Edit Selected Template</h2>
           <TemplateEditor template={template} />
         </div>
-      )}
+      )} */}
     </div>
   );
 }
